@@ -1,0 +1,46 @@
+Hello <%=@_current_facebook_user.name %> !
+
+<p>The application shows how facebooker2 provides canvas+iframe integration with OAuth 2.0</p>
+
+<p>We fetched your name on the server side by using Facebooker2 and Mogli.</p>
+
+Now we will fetch some of your friends using the client-side Javascript API:
+
+<div id="profile_pics">loading...</div>
+
+
+If you click this link to reload the page you should still be authenticated on the server side even though there is no signed_request.
+This is because we should now have a cookie with all of the relevant auth info
+<br/>
+<a href="/home">Clicky</a>
+
+
+<script>
+fbEnsureInit(function() {
+	alert('loading profile pics');
+	var profilePicsDiv = document.getElementById('profile_pics');
+	FB.getLoginStatus(function(response) {
+	  if (!response.session) {
+	    profilePicsDiv.innerHTML = '<em>You are not connected</em>';
+	    return;
+	  }
+	
+	  FB.api({ method: 'friends.get' }, function(result) {
+	    var markup = '';
+	    var numFriends = result ? Math.min(15, result.length) : 0;
+	    if (numFriends > 0) {
+	      for (var i=0; i<numFriends; i++) {
+	        markup += (
+	          '<fb:profile-pic size="square" ' +
+	                          'uid="' + result[i] + '" ' +
+	                          'facebook-logo="true"' +
+	          '></fb:profile-pic>'
+	        );
+	      }
+	    }
+	    profilePicsDiv.innerHTML = markup;
+	    FB.XFBML.parse(profilePicsDiv);
+	  });
+	});
+});
+</script>

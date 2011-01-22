@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  facebook_id: MyString
+  access_token: MyString
+  access_token_expires: 2010-12-12 23:56:26
+
+two:
+  name: MyString
+  facebook_id: MyString
+  access_token: MyString
+  access_token_expires: 2010-12-12 23:56:26

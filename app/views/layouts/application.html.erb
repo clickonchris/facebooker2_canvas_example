@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Facebooker2 Canvas Example</title>
+  <%= stylesheet_link_tag 'scaffold' %>
+</head>
+<body>
+	<script>
+	var onload=[];
+	
+	/** function to ensure FB.init has completed before executing some code
+	 * 
+	 * Usage:
+	 * fbEnsureInit(function() {
+     *		console.log("this will be run once FB is initialized");
+	 *	});
+	 * @param {Object} callback
+	 */
+	function fbEnsureInit(callback) {
+        if(!window.fbApiInit) {
+            setTimeout(function() {fbEnsureInit(callback);}, 50);
+        } else {
+            if(callback) {
+                callback();
+            }
+        }
+    }
+	</script>
+	
+	<% fb_connect_async_js  do %>    
+      <%= yield :fb_connect%>
+	  FB.Canvas.setAutoResize();
+	  fbApiInit = true; //init flag
+	  //FB.XD._origin = (window.location.protocol+'//'+window.location.host+'/'+FB.guid());
+	  
+  	  /*FB.getLoginStatus(function(response) {
+	  	if (response.session) {
+			alert('the user is logged in');
+		}
+		else {
+			alert('the user is not logged in');
+		}
+	  });
+	  */
+	  FB.Event.subscribe('auth.sessionChange', function(response) {
+	    if (response.session) {
+	      // A user has logged in, and a new cookie has been saved
+		  //alert('user logged in');
+	    } else {
+	      // The user has logged out or removed permissions to this app. The cookie has been cleared
+		  // If the user is still logged into facebook but has removed permissions
+		  alert('user logged out.  redirecting');
+		  logout();
+	    }
+	  });
+    <% end %>
+
+<p style="color: green"><%= flash[:notice] %></p>
+
+<%= yield %>
+
+</body>
+	
+</html>
