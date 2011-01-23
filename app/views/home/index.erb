@@ -14,10 +14,21 @@ This is because we should now have a cookie with all of the relevant auth info
 <br/>
 <a href="/home">Clicky</a>
 
+<p style="text-align:center;">
+a Christopher G Johnson production
+</p>
+<p>
+	The source code for this page is available at 
+	<a href="https://github.com/clickonchris/facebooker2_canvas_example" target="_BLANK">https://github.com/clickonchris/facebooker2_canvas_example</a>
+</p>
+<a href="mailto:chris@clickonchris.com">chris@clickonchris.com</a><br/>
+<a href="http://www.clickonchris.com" target="_BLANK">www.clickonchris.com</a> (Author's Blog)<br/><br/>
+<a href="http://www.twitter.com/clickonchris" target="_BLANK"><img src="http://twitter-badges.s3.amazonaws.com/follow_me-b.png" alt="Follow clickonchris on Twitter"/></a><br/><br/>
+<a href="http://www.linkedin.com/in/johnsonchristopherg" target="_BLANK"><img src="http://www.linkedin.com/img/webpromo/btn_viewmy_160x25.gif" border="0" alt="View Christopher Johnson's profile on LinkedIn" width="160" height="25" /></a>(Hire me!)
 
 <script>
 fbEnsureInit(function() {
-	alert('loading profile pics');
+	//alert('loading profile pics');
 	var profilePicsDiv = document.getElementById('profile_pics');
 	FB.getLoginStatus(function(response) {
 	  if (!response.session) {

@@ -9,19 +9,16 @@
 # This should only be necessary until the final version of the new profile is released.
 
 development:
-  app_id: 138352476218334
-  secret: 1020ef35d9774ff638d1656a263d8182
-  api_key: 27a7a8b0b1687813aadaa8075783e871
-  host: web1.tunnlr.com 
+  app_id: 148439841877340
+  secret: dba136f9ebe98c81a9acd063ab3ac3ee
+  api_key: ab10621e6477ea9b6a5ccf27d65f5f40
 
 production:
   app_id: 138352476218334
   secret: 1020ef35d9774ff638d1656a263d8182
   api_key: 27a7a8b0b1687813aadaa8075783e871
-  host: web1.tunnlr.com 
 
 test:
   app_id: 138352476218334
   secret: 1020ef35d9774ff638d1656a263d8182
   api_key: 27a7a8b0b1687813aadaa8075783e871
-  host: web1.tunnlr.com 

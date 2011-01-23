@@ -143,8 +143,6 @@ module Facebooker2
       end
       
       
-
-      
       # /**
       #   This method was shamelessly stolen from the php facebook SDK:
       #   https://github.com/facebook/php-sdk/blob/master/src/facebook.php
@@ -160,8 +158,15 @@ module Facebooker2
         #default values for the cookie
         value = 'deleted'
         expires = Time.now.utc - 3600 unless expires != nil
+        
+        # php sdk uses domain in the cookie but I have not found it necessary.
+        # This code works so I'm leaving it in commented out in case someone else needs it
         #need to find the best way to get the base domain.  facebooker file?
-        domain = Facebooker2.host
+#        domain = Facebooker2.host
+#        # ? prepend dot if a domain is found ?
+#        if (domain) 
+#          domain = '.' + domain;
+#        end
         
         if access_token
           value = '"uid=' + uid + '&' +
@@ -169,12 +174,7 @@ module Facebooker2
                   'expires=' + expires.to_i.to_s + '&' +
                   'sig=' + sig + '"'
         end
-    
-        # ? prepend dot if a domain is found ?
-        if (domain) 
-          domain = '.' + domain;
-        end
-    
+  
         # if an existing cookie is not set, we dont need to delete it
         if (value == 'deleted' && cookies[fb_cookie_name] == "" ) 
           return;
@@ -185,8 +185,7 @@ module Facebooker2
         
         #My browser doesn't seem to save the cookie if I set expires
         cookies[fb_cookie_name] = { :value=>value }#, :expires=>expires}
-        #cookies["test"] = { :value=>"whats up"}
-        logger.info "fb_cookie: " + cookies[fb_cookie_name]
+        #logger.info "fb_cookie: " + cookies[fb_cookie_name]
       end
     end
   end

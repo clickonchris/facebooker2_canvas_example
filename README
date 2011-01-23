@@ -1,3 +1,11 @@
 == Facebooker2 iFrame Canvas Example
 
 This project is an example of a Facebook iFrame Canvas application implemented in rails using the Facebooker2 library.
+The authentication mechanism is modelled more closely after the facebook php sdk and uses NO SESSIONS for authentication, only cookies
+
+You can find a running version of this code at:
+
+http://apps.facebook.com/fb-canvas-example/
+
+==Known Issues
+-IE seems to still have problems when your server is using a non-standard port (usually in development).
