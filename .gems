@@ -1,1 +1,3 @@
+rails -v 2.3.5
+pg
 mogli -v 0.0.15
