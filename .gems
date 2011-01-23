@@ -1,4 +1,4 @@
 rails -v 2.3.5
 pg
 mogli -v 0.0.15
-hmac-sha2
+ruby-hmac -v 0.4.0
