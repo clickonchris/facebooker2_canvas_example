@@ -32,7 +32,6 @@ module Facebooker2
         
         #write the authentication params to a new cookie
         if !@_current_facebook_client.nil? 
-          logger.info "writing new cookie"
           #we may have generated the signature based on the params in @facebook_params, and the expiration here is different
           
           set_fb_cookie(@_current_facebook_client.access_token, @_current_facebook_client.expiration, @_current_facebook_user.id, sig)
@@ -90,11 +89,11 @@ module Facebooker2
       
       # check if the expected signature matches the one from facebook
       def fb_cookie_signature_correct?(hash,secret)
-        generateSignature(hash,secret) == hash["sig"]
+        generate_signature(hash,secret) == hash["sig"]
       end
       
       # compute the md5 sig based on access_token,expires,uid, and the app secret
-      def generateSignature(hash,secret)
+      def generate_signature(hash,secret)
         sorted_keys = hash.keys.reject {|k| k=="sig"}.sort
         test_string = ""
         sorted_keys.each do |key|
@@ -102,7 +101,6 @@ module Facebooker2
         end
         test_string += secret
         sig = Digest::MD5.hexdigest(test_string)
-        logger.info "generated sig: " + sig
         return sig
       end
       
@@ -135,9 +133,9 @@ module Facebooker2
           fb_create_user_and_client(facebook_params[:oauth_token],facebook_params[:expires],facebook_params[:user_id])
           
           if @_current_facebook_client
-          #compute a signature so we can store it in the cookie
+            #compute a signature so we can store it in the cookie
             sig_hash = Hash["uid"=>facebook_params[:user_id],"access_token"=>facebook_params[:oauth_token],"expires"=>facebook_params[:expires]]
-            return generateSignature(sig_hash, Facebooker2.secret)
+            return generate_signature(sig_hash, Facebooker2.secret)
           end
         end
       end
@@ -159,15 +157,6 @@ module Facebooker2
         value = 'deleted'
         expires = Time.now.utc - 3600 unless expires != nil
         
-        # php sdk uses domain in the cookie but I have not found it necessary.
-        # This code works so I'm leaving it in commented out in case someone else needs it
-        #need to find the best way to get the base domain.  facebooker file?
-#        domain = Facebooker2.host
-#        # ? prepend dot if a domain is found ?
-#        if (domain) 
-#          domain = '.' + domain;
-#        end
-        
         if access_token
           value = '"uid=' + uid + '&' +
                   'access_token=' + access_token + '&' +
@@ -185,7 +174,6 @@ module Facebooker2
         
         #My browser doesn't seem to save the cookie if I set expires
         cookies[fb_cookie_name] = { :value=>value }#, :expires=>expires}
-        #logger.info "fb_cookie: " + cookies[fb_cookie_name]
       end
     end
   end

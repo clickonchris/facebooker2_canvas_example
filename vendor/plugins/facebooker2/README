@@ -1,0 +1,67 @@
+Facebooker2
+===========
+
+Provides rails helpers for interfacing with Facebook's OpenGraph Javascript
+API, http://developers.facebook.com/docs/reference/javascript/.
+
+Requires the mogli gem.
+
+
+Example
+=======
+
+0. Prerequisite: You need a facebook app.  Have your API Key, Application
+Secret, and Application ID handy.
+
+1. Install facebooker2 as a plugin in your rails app.
+
+2. Create config/facebooker.yml with the appropriate environment.
+
+production:
+  app_id: <your application id>
+  secret: <your application secret>
+  api_key: <your application key>
+
+3. Create config/initializers/facebooker2.rb and place the following line in it
+
+Facebooker2.load_facebooker_yaml
+
+4. Add the following line to your app/controllers/application_controller.rb
+
+include Facebooker2::Rails::Controller
+
+5. Update your rails applications to use the rails helpers.  This could be in a
+shared login partial.
+
+<%= fb_connect_async_js %>
+<% if current_facebook_user %>
+   <%= "Welcome #{current_facebook_user.first_name} #{current_facebook_user.last_name}!" %>
+   or 
+   <%= "Hello #{fb_name(current_facebook_user, :useyou => false)}!" # link to facebook profile
+    %>
+  <%= fb_logout_link("Logout of fb", request.url) %><br />
+<% else
+   # you must explicitly request permissions for facebook user fields.
+   # here we instruct facebook to ask the user for permission for our website
+   # to access the user's facebook email and birthday
+   %>
+  <%= fb_login_and_redirect('<your URL here>', :perms => 'email,user_birthday') %>
+<% end %>
+
+
+Contributing
+============
+
+Unit tests use rspec and require the following environment configuration to run:
+rails 2.3.10
+rspec 1.3.1
+rspec-rails 1.3.3
+json 1.4.0
+
+Invoke tests on Mac/Linux by running 'rake spec' from this directory
+
+Invoke tests on Windows by running 'spec spec/' from this directory
+
+
+
+Copyright (c) 2010 Mike Mangino, released under the MIT license

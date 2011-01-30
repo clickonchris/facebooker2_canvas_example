@@ -3,7 +3,7 @@ require "mogli"
 module Facebooker2
   class NotConfigured < Exception; end
   class << self
-    attr_accessor :api_key, :secret, :app_id, :host
+    attr_accessor :api_key, :secret, :app_id
   end
     
   def self.secret
@@ -22,12 +22,10 @@ module Facebooker2
     self.api_key = hash[:api_key]
     self.secret = hash[:secret]
     self.app_id = hash[:app_id]
-    self.host = hash[:host]
-    
   end
   
   def self.load_facebooker_yaml
-    config = YAML.load(File.read(File.join(::Rails.root,"config","facebooker.yml")))[::Rails.env]
+    config = YAML.load(ERB.new(File.read(File.join(::Rails.root,"config","facebooker.yml"))).result)[::Rails.env]
     raise NotConfigured.new("Unable to load configuration for #{::Rails.env} from facebooker.yml. Is it set up?") if config.nil?
     self.configuration = config.with_indifferent_access
   end
