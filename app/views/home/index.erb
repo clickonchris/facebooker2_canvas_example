@@ -28,7 +28,7 @@ a Christopher G Johnson production
 
 <script>
 fbEnsureInit(function() {
-	//alert('loading profile pics');
+
 	var profilePicsDiv = document.getElementById('profile_pics');
 	FB.getLoginStatus(function(response) {
 	  if (!response.session) {
@@ -37,6 +37,7 @@ fbEnsureInit(function() {
 	  }
 	
 	  FB.api({ method: 'friends.get' }, function(result) {
+	  		alert('loading profile pics');
 	    var markup = '';
 	    var numFriends = result ? Math.min(15, result.length) : 0;
 	    if (numFriends > 0) {
