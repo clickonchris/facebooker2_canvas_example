@@ -11,7 +11,7 @@ Rails::Initializer.run do |config|
    File.directory?(lib = "#{dir}/lib") ? lib : dir
   end
 
-  config.gem "facebooker2"
+  #config.gem "facebooker2"
 
   config.time_zone = 'UTC'
 #  config.action_controller.session = {
