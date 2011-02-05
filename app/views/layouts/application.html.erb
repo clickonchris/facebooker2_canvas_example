@@ -30,9 +30,9 @@
         }
     }
 	</script>
-	<!--
-	<#% fb_connect_async_js  do %>    
-      <#%= yield :fb_connect%>
+
+	<% fb_connect_async_js  do %>    
+      <%= yield :fb_connect%>
 
 	  FB.Canvas.setAutoResize();
 	  fbApiInit = true; //init flag
@@ -40,7 +40,7 @@
 	  
   	  FB.getLoginStatus(function(response) {
 	  	if (response.session) {
-			alert('the user is logged in');
+			//alert('the user is logged in');
 		}
 		else {
 			alert('the user is not logged in');
@@ -59,8 +59,8 @@
 	    }
 	  });
 	  
-    <#% end %>
-	-->
+    <% end %>
+
 <p style="color: green"><%= flash[:notice] %></p>
 
 <%= yield %>
