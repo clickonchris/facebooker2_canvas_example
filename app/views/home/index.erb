@@ -1,18 +1,38 @@
-Hello <%=@_current_facebook_user.name %> !
-
+<b>Hello <%=@_current_facebook_user.name %> !</b>
+<br/>
+<div style="float:right;border-radius: 10px;border: 1px solid #000000; width:300px; padding:5px ">
+	<b><%=@_current_facebook_user %>,</b>
+	<br/><br/>
+	You have given me access to quite a lot of your data and Facebooker helps me read it.
+	Luckily I am not saving or selling your data as that would violate Facebook's Terms of Service
+	<br/>
+	<b>Your Bio...</b>
+	<br/>
+	<b>Birthday:</b> <%=@_current_facebook_user.birthday %>
+	<br/>
+	<b>Gender:</b> <%=@_current_facebook_user.gender %>
+	<br/>
+	<b>Likes:</b>
+	<br/>
+	<% @_current_facebook_user.likes.each do |like| %>
+		&nbsp;<%=like.name%>
+		<br/>
+	<% end %>
+</div>
 <p>The application shows how facebooker2 provides canvas+iframe integration with OAuth 2.0</p>
 
 <p>We fetched your name on the server side by using Facebooker2 and Mogli.</p>
-
+<!--
 Now we will fetch your picture using the client-side Javascript API:
 
 <fb:profile-pic uid="loggedinuser" size="small" facebook-logo="true"></fb:profile-pic>
-<br/><br/>
 
+<br/><br/>
+-->
 If you click this link to reload the page you should still be authenticated on the server side even though there is no signed_request.
 This is because we should now have a cookie with all of the relevant auth info
-<br/>
-<a href="/home">Clicky</a>
+<br/><br/>
+<a href="/home">Click here</a>
 
 <p style="text-align:center;">
 a Christopher G Johnson production
@@ -26,4 +46,15 @@ a Christopher G Johnson production
 <a href="http://www.twitter.com/clickonchris" target="_BLANK"><img src="http://twitter-badges.s3.amazonaws.com/follow_me-b.png" alt="Follow clickonchris on Twitter"/></a><br/><br/>
 <a href="http://www.linkedin.com/in/johnsonchristopherg" target="_BLANK"><img src="http://www.linkedin.com/img/webpromo/btn_viewmy_160x25.gif" border="0" alt="View Christopher Johnson's profile on LinkedIn" width="160" height="25" /></a>(Hire me!)
 
-
+<!--
+<a href="#" onclick="popup()">Test this stuff suckers</a>
+-->
+<script typ='text/javascript'>
+	
+	function popup(){
+		FB.ui({
+			method: 'stream.share',
+			u: 'http://www.clickonchris.com'
+		})
+	}
+</script>

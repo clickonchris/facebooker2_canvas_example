@@ -30,14 +30,15 @@
         }
     }
 	</script>
-	
-	<% fb_connect_async_js  do %>    
-      <%= yield :fb_connect%>
+	<!--
+	<#% fb_connect_async_js  do %>    
+      <#%= yield :fb_connect%>
+
 	  FB.Canvas.setAutoResize();
 	  fbApiInit = true; //init flag
 	  //FB.XD._origin = (window.location.protocol+'//'+window.location.host+'/'+FB.guid());
 	  
-  	  /*FB.getLoginStatus(function(response) {
+  	  FB.getLoginStatus(function(response) {
 	  	if (response.session) {
 			alert('the user is logged in');
 		}
@@ -45,7 +46,7 @@
 			alert('the user is not logged in');
 		}
 	  });
-	  */
+	  
 	  FB.Event.subscribe('auth.sessionChange', function(response) {
 	    if (response.session) {
 	      // A user has logged in, and a new cookie has been saved
@@ -57,8 +58,9 @@
 		  logout();
 	    }
 	  });
-    <% end %>
-
+	  
+    <#% end %>
+	-->
 <p style="color: green"><%= flash[:notice] %></p>
 
 <%= yield %>

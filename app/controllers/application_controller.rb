@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
   # more details on the scope and display options can be found here:
   # http://developers.facebook.com/docs/authentication/
   def auth_url
-    url = authenticator.authorize_url(:scope => '', :display => 'page')
+    url = authenticator.authorize_url(:scope => 'user_birthday,user_likes', :display => 'page')
     logger.info "redirecting to " + url
     return url
   end

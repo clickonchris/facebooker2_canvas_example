@@ -8,4 +8,4 @@ You can find a running version of this code at:
 http://apps.facebook.com/fb-canvas-example/
 
 ==Known Issues
--IE seems to still have problems when your server is using a non-standard port (usually in development).
+-IE client-side javascript SDK seems to still have problems when your server is using a non-standard port (usually in development).
